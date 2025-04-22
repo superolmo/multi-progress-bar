@@ -30,14 +30,6 @@ class MultiProgressBar():
 
     update_lock = Lock()
 
-    # Example
-    test_lanes = [
-          {"status": "Processing Live Streams", "total": 100},
-          {"status": "Processing VOD Streams", "total": 100},
-          {"status": "Processing Series Streams", "total": 100},
-          {"status": "Downloading 1234 streams", "total": 0},
-    ]
-
     def __init__(self, bar_len: int = 30):
 
         # Only allow from 10 to 80 characters progress bar width
@@ -115,10 +107,11 @@ class MultiProgressBar():
                 filled_len = int(round(self.bar_len * count / float(total)))
 
                 percents = round(100.0 * count / float(total), 1)
+                percents_str = f'{percents:.1f}'
                 bar_filled = '=' * filled_len + '-' * \
                              (self.bar_len - filled_len)
                 self.lanes[lane_id]["display"] = f'[{bar_filled}] ' \
-                                                 f'{percents}% - {status}\n'
+                                                 f'{percents_str:>5}% - {status}\n'
 
     def start_timed_flush(self):
         """Starts a timer to periodically update the progress display.

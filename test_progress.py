@@ -1,10 +1,12 @@
 import threading
 import time
 
-from multi_progress_bar import MultiProgressBar
+from multi_progress_bar import MultiProgressBar, __version__
 
 # Create a progress bar
 pb = MultiProgressBar()
+
+print(f"Multi Progress Bar version {__version__}")
 
 # Add some lanes
 laneID1 = pb.add_lane(status="Task 1", total=100)
